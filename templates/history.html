@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>History of Accepted Complaints</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: sans-serif;
+    }
+
+    body {
+      background-image: url("{{ url_for('static', filename='images/pexels-cup-of-couple-6177615.jpg') }}");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      height: 170vh; /* Full height */
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 50px;
+      background-color: #212529;
+      color: white;
+      z-index: 1000;
+    }
+
+    header .logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    header ul {
+      list-style-type: none;
+      display: flex;
+    }
+
+    header ul li {
+      padding: 10px;
+    }
+
+    header ul li a {
+      text-decoration: none;
+      color: white;
+      font-size: 16px;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    header ul li a:hover {
+      color: #f1c40f;
+    }
+
+    footer {
+      background-color: #212529;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      position: fixed;
+      bottom: -100px; /* Initially hidden */
+      width: 100%;
+      box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.3);
+      transition: bottom 0.3s;
+    }
+
+    footer p {
+      margin: 0;
+    }
+
+    main {
+      padding: 120px;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .card {
+      width: 350px;
+      background-color: #ffffff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      margin: 20px;
+      border: none;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    .card-body {
+      padding: 16px;
+      font-size: 1em;
+    }
+
+    .card-body p {
+      color: #5b5858;
+      font-size: 15px;
+      line-height: 1.3;
+    }
+
+    .card-body small {
+      display: block;
+      margin-bottom: 10px;
+      color: #666;
+    }
+
+    .problem-photo-container {
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    .problem-photo-container h4 {
+      font-size: 1.1em;
+      margin-bottom: 8px;
+    }
+
+    .problem-photo-container img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      border: 2px solid #ddd;
+      transition: transform 0.3s ease;
+    }
+
+    .problem-photo-container img:hover {
+      transform: scale(1.05);
+    }
+
+    h2 {
+      font-family: "Arial", sans-serif;
+      margin-top: 30px;
+      text-align: center;
+      color: #002244;
+      margin-bottom: 30px;
+      font-size: 28px;
+      animation: fadeIn 1s ease-in;
+    }
+
+    .product-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 50px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">Service Provider</div>
+    <ul>
+      <li><a href="{{ url_for('view_problems') }}">View Problems</a></li>
+      <li><a href="{{ url_for('accepted_work') }}">Accepted Work</a></li>
+      <li><a href="{{ url_for('list_product') }}">List Products</a></li>
+      <li><a href="{{ url_for('browse_products') }}">Browse Products</a></li>
+      <li><a href="{{ url_for('history') }}">History</a></li>
+    </ul>
+  </header>
+
+  <main>
+    <h2>History of Accepted Complaints</h2>
+    <div class="product-container">
+      {% if complaints %}
+        {% for complaint in complaints %}
+          <div class="card">
+            <div class="card-body">
+              <p>{{ complaint.description }}</p>
+              <small>Posted on: {{ complaint.date_created.strftime('%Y-%m-%d') }}</small>
+              {% if complaint.photo %}
+                <div class="problem-photo-container">
+                  <h4>Problem Photo</h4>
+                  <img src="{{ url_for('static', filename='uploads/' ~ complaint.photo) }}" alt="Problem Photo" class="img-fluid" />
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <p>No accepted complaints found.</p>
+      {% endif %}
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2024 Service Provider</p>
+  </footer>
+
+</body>
+</html>

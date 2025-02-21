@@ -1,0 +1,152 @@
+{% extends 'layout.html' %} {% block content %}
+
+<style>
+  body {
+    background-image: url("{{ url_for('static', filename='images/pexels-oscar-helgstrand-3692072-5957558.jpg') }}");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 100vh; /* Full height */
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+      }
+  main {
+    padding: 120px;
+    max-width: 800px;
+    margin: auto;
+    background-attachment: fixed;
+  }
+  .container {
+    
+    background: #ffffffd4;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+    max-width: 500px;
+  }
+
+  h2 {
+    text-align: center;
+    color: #002244;
+    margin-bottom: 30px;
+    font-size: 28px;
+    animation: fadeIn 1s ease-in;
+  }
+</style>
+<div class="container">
+  <h2>User Registration</h2>
+  <form
+    method="POST"
+    class="container mt-4 p-4 bg-white rounded shadow"
+    style="max-width: 600px"
+  >
+    <div class="mb-3">
+      <label for="name" class="form-label fw-bold">Name:</label>
+      <input type="text" class="form-control" id="name" name="name" required />
+    </div>
+
+    <div class="mb-3">
+      <label for="email" class="form-label fw-bold">Email:</label>
+      <input
+        type="email"
+        class="form-control"
+        id="email"
+        name="email"
+        required
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="password" class="form-label fw-bold">Password:</label>
+      <input
+        type="password"
+        class="form-control"
+        id="password"
+        name="password"
+        required
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="date_of_birth" class="form-label fw-bold"
+        >Date of Birth:</label
+      >
+      <input
+        type="date"
+        class="form-control"
+        id="date_of_birth"
+        name="date_of_birth"
+        required
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="city" class="form-label fw-bold">City:</label>
+      <input type="text" class="form-control" id="city" name="city" required />
+    </div>
+
+    <div class="mb-3">
+      <label for="state" class="form-label fw-bold">State:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="state"
+        name="state"
+        required
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="address" class="form-label fw-bold">Address:</label>
+      <textarea
+        class="form-control"
+        id="address"
+        name="address"
+        rows="3"
+        required
+      ></textarea>
+    </div>
+
+    <div class="mb-3">
+      <label for="pin_code" class="form-label fw-bold">Pin Code:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="pin_code"
+        name="pin_code"
+        required
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="aadhar_card_no" class="form-label fw-bold"
+        >Aadhar Card No:</label
+      >
+      <input
+        type="text"
+        class="form-control"
+        id="aadhar_card_no"
+        name="aadhar_card_no"
+        required
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="phone_no" class="form-label fw-bold">Phone No:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="phone_no"
+        name="phone_no"
+        required
+      />
+    </div>
+
+    <button type="submit" class="btn btn-dark w-100">Register</button>
+  </form>
+
+  <!-- <br /><br /><br /><br /> -->
+</div>
+{% endblock %}

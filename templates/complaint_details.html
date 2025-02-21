@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h2>Complaint Details</h2>
+
+<div>
+    <p><strong>Description:</strong> {{ complaint.description }}</p>
+    <p><strong>City:</strong> {{ complaint.city }}</p>
+    <p><strong>Category:</strong> {{ complaint.category }}</p>
+    <p><strong>Posted on:</strong> {{ complaint.date_created.strftime('%Y-%m-%d') }}</p>
+    <h3>User Details</h3>
+    <p><strong>Name:</strong> {{ user.name }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <p><strong>Address:</strong> {{ user.address }}</p>
+    <p><strong>Phone Number:</strong> {{ user.phone_no }}</p>
+</div>
+
+
+
+<a href="{{ url_for('accepted_work') }}" class="btn btn-secondary mt-4">Back to Accepted Complaints</a>
+{% endblock %}

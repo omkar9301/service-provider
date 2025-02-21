@@ -1,0 +1,179 @@
+{% block content %}
+<style>
+   body {
+     background: linear-gradient(45deg, #B7094C, #A01A58, #892B64, #723C70, #5C4D7D, #455E89, #2E6F95, #1780A1, #0091AD);
+   }
+  .card {
+    width: 90%;
+    max-width: 700px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .card-body {
+    background: #fff;
+    padding: 20px 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .card-body ul {
+    list-style: none;
+    padding: 0;
+  }
+  .card-body li {
+    padding: 12px 0;
+    border-bottom: 1px solid #ddd;
+    font-size: 18px;
+  }
+
+  .card-body li:last-child {
+        border-bottom: none;
+      }
+
+  .card-body li strong {
+    color: #000;
+    width: 200px;
+    display: inline-block;
+  }
+
+  .card-body h4 {
+    margin-top: 20px;
+    font-size: 28px;
+    color: #000;
+  }
+
+  #map {
+    height: 400px;
+    width: 100%;
+    margin-top: 30px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  h1 {
+    font-family: 'Arial', sans-serif;
+    margin-top: 30px;
+    text-align: center;
+    color: #002244;
+    margin-bottom: 30px;
+    font-size: 28px;
+    animation: fadeIn 1s ease-in;
+  }
+
+  p {
+    font-size: 15px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  .leaflet-container {
+    border-radius: 8px;
+  }
+
+  .btn-back {
+    display: inline-block;
+    align-self: center;
+    margin-top: 20px;
+    padding: 12px 25px;
+    background-color: #000;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+
+  .btn-back:hover {
+    background-color: #212529;
+    transform: translateY(-2px);
+  }
+
+  .btn-rating {
+    margin-top: 20px;
+    background-color: #28a745;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+
+  .btn-rating:hover {
+    background-color: #218838;
+  }
+
+</style>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+<h1>Vendor Details</h1>
+<div class="card">
+  <div class="card-body">
+    <ul>
+      <li><strong>Name:</strong> {{ vendor.name }}</li>
+      <li><strong>Email:</strong> {{ vendor.email }}</li>
+      <li><strong>Date of Birth:</strong> {{ vendor.date_of_birth.strftime('%Y-%m-%d') }}</li>
+      <li><strong>City:</strong> {{ vendor.city }}</li>
+      <li><strong>State:</strong> {{ vendor.state }}</li>
+      <li><strong>Address:</strong> {{ vendor.address }}</li>
+      <li><strong>Pin Code:</strong> {{ vendor.pin_code }}</li>
+      <li><strong>Aadhar Card No:</strong> {{ vendor.aadhar_card_no }}</li>
+      <li><strong>Phone No:</strong> {{ vendor.phone_no }}</li>
+      <li><strong>Category:</strong> {{ vendor.category }}</li>
+      <li><strong>Ratings:</strong> {{ vendor.rating }}</li>
+    </ul>
+    
+    <!-- Rating Form -->
+    <form method="POST" action="{{ url_for('rate_vendor', vendor_id=vendor.id) }}">
+      <label for="rating">Rate Vendor (1 to 5):</label>
+      <input type="number" id="rating" name="rating" min="1" max="5" required>
+      <button type="submit" class="btn-rating">Submit Rating</button>
+    </form>
+    
+    <!-- Display Location -->
+    {% if vendor.lat and vendor.lng %}
+    <div>
+      <h4>Location:</h4>
+      <p>Latitude: {{ vendor.lat }}</p>
+      <p>Longitude: {{ vendor.lng }}</p>
+      <div id="map"></div>
+    </div>
+    {% else %}
+    <p>Location not available.</p>
+    {% endif %}
+    
+    <div class="button">
+      <a href="{{ url_for('accepted_complaints') }}" class="btn-back">Back to Accepted Complaints</a>
+    </div>
+    
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        function initMap() {
+            var vendorLocation = {
+                lat: parseFloat("{{ vendor.lat }}"),
+                lng: parseFloat("{{ vendor.lng }}"),
+            };
+            
+            var map = L.map("map").setView([vendorLocation.lat, vendorLocation.lng], 12);
+            
+            L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+                maxZoom: 18,
+                attribution: "© OpenStreetMap",
+            }).addTo(map);
+            
+            L.marker([vendorLocation.lat, vendorLocation.lng]).addTo(map);
+        }
+        
+        window.onload = initMap;
+    </script>
+  </div>
+</div>
+{% endblock %}

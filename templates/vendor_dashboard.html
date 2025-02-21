@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vendor Dashboard</title>
+    <link rel="stylesheet" href="../static/css/vendordashboard.css" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        background-image: url("{{ url_for('static', filename='images/pexels-kifkif13-photos-3614682-5997686.jpg') }}");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 170vh; /* Full height */
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+       <!-- <h1 class="logo">Vendor Dashboard<br><span>Welcome, {{ vendor.name }}</span></h1> -->
+         <h1 class="logo">Vendor Dashboard</h1>
+        <h2 class="logo">Welcome, {{ vendor.name }}</h2>
+    
+
+      <button class="menu-toggle" id="menuToggle">☰</button>
+
+      <ul>
+        <li><a href=""></a></li>
+        <li><a href="{{ url_for('view_problems') }}">View Problem</a></li>
+        <li><a href="{{ url_for('accepted_work') }}">Accepted Work</a></li>
+        <li><a href="{{ url_for('list_product') }}">List Products</a></li>
+        <li><a href="{{ url_for('browse_products') }}">Browse Products</a></li>
+        <li><a href="{{ url_for('history') }}">History</a></li>
+      </ul>
+
+      <div class="icon-container">
+        <a href="{{ url_for('vendor_profile') }}" class="profile-icon">
+          <span class="material-icons">person</span>
+          <span class="tooltip-text">Profile</span>
+        </a>
+
+        <a href="{{ url_for('logout') }}" class="logout-icon">
+          <span class="material-icons">logout</span>
+          <span class="tooltip-text">Logout</span>
+        </a>
+      </div>
+    </header>
+  
+    <main>
+      {% block content %}
+      <!-- Content from extended templates will be inserted here -->
+      {% endblock %}
+    </main>
+    <footer id="footer">
+      <p>&copy; 2024 Service Provider</p>
+    </footer>
+
+    <script type="text/javascript">
+      document.addEventListener("DOMContentLoaded", function () {
+        var footer = document.getElementById("footer");
+        var footerHeight = footer.offsetHeight;
+
+        function handleScroll() {
+          var scrollPosition = window.innerHeight + window.scrollY;
+          var documentHeight = document.documentElement.scrollHeight;
+
+          if (scrollPosition >= documentHeight - footerHeight) {
+            footer.style.bottom = "0";
+          } else {
+            footer.style.bottom = "-" + footerHeight + "px";
+          }
+        }
+
+        window.addEventListener("scroll", handleScroll);
+        handleScroll(); // Initial check
+        });
+
+        window.addEventListener("scroll", function () {
+        var header = document.querySelector("header");
+        header.classList.toggle("sticky", window.scrollY > 0);
+      });
+
+
+      document
+        .getElementById("menuToggle")
+        .addEventListener("click", function () {
+          const menu = document.getElementById("menu");
+          menu.classList.toggle("open"); // Toggle the 'open' class
+        });
+    </script>
+    <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"
+  ></script>
+  </body>
+</html>

@@ -1,0 +1,180 @@
+
+
+<html>
+<style>
+  * {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+  }
+
+  body {
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+
+  .container {
+    padding: 20px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  table, th, td {
+    border: 1px solid #ddd;
+  }
+
+  th, td {
+    padding: 12px;
+    text-align: left;
+  }
+
+  th {
+    background-color: #4CAF50;
+    color: white;
+  }
+
+  td {
+    background-color: #f2f2f2;
+  }
+
+  h2 {
+    text-align: center;
+    color: #333;
+  }
+</style>
+
+<div class="container">
+  <h2>View All Tables and Their Data</h2>
+
+  <!-- Display Users Table -->
+  <h3>Users</h3>
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Date of Birth</th>
+      <th>City</th>
+      <th>State</th>
+      <th>Address</th>
+      <th>Pin Code</th>
+      <th>Aadhar Card No</th>
+      <th>Phone No</th>
+    </tr>
+    {% for user in users %}
+    <tr>
+      <td>{{ user.id }}</td>
+      <td>{{ user.name }}</td>
+      <td>{{ user.email }}</td>
+      <td>{{ user.date_of_birth }}</td>
+      <td>{{ user.city }}</td>
+      <td>{{ user.state }}</td>
+      <td>{{ user.address }}</td>
+      <td>{{ user.pin_code }}</td>
+      <td>{{ user.aadhar_card_no }}</td>
+      <td>{{ user.phone_no }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  <!-- Display Vendors Table -->
+  <h3>Vendors</h3>
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Date of Birth</th>
+      <th>City</th>
+      <th>State</th>
+      <th>Address</th>
+      <th>Pin Code</th>
+      <th>Aadhar Card No</th>
+      <th>Phone No</th>
+      <th>Category</th>
+      <th>Rating</th>
+    </tr>
+    {% for vendor in vendors %}
+    <tr>
+      <td>{{ vendor.id }}</td>
+      <td>{{ vendor.name }}</td>
+      <td>{{ vendor.email }}</td>
+      <td>{{ vendor.date_of_birth }}</td>
+      <td>{{ vendor.city }}</td>
+      <td>{{ vendor.state }}</td>
+      <td>{{ vendor.address }}</td>
+      <td>{{ vendor.pin_code }}</td>
+      <td>{{ vendor.aadhar_card_no }}</td>
+      <td>{{ vendor.phone_no }}</td>
+      <td>{{ vendor.category }}</td>
+      <td>{{ vendor.rating }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  <!-- Display Complaints Table -->
+  <h3>Complaints</h3>
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>User ID</th>
+      <th>Description</th>
+      <th>City</th>
+      <th>Category</th>
+      <th>Date Created</th>
+      <th>Is Accepted</th>
+      <th>Vendor ID</th>
+      <th>Photo</th>
+    </tr>
+    {% for complaint in complaints %}
+    <tr>
+      <td>{{ complaint.id }}</td>
+      <td>{{ complaint.user_id }}</td>
+      <td>{{ complaint.description }}</td>
+      <td>{{ complaint.city }}</td>
+      <td>{{ complaint.category }}</td>
+      <td>{{ complaint.date_created }}</td>
+      <td>{{ complaint.is_accepted }}</td>
+      <td>{{ complaint.vendor_id }}</td>
+      <td><img src="{{ url_for('static', filename='uploads/' ~ complaint.photo) }}" alt="Complaint Photo" style="width: 100px;"></td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  <!-- Display Products Table -->
+  <h3>Products</h3>
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Category</th>
+      <th>Price</th>
+      <th>Date Created</th>
+      <th>User ID</th>
+      <th>Vendor ID</th>
+    </tr>
+    {% for product in products %}
+    <tr>
+      <td>{{ product.id }}</td>
+      <td>{{ product.name }}</td>
+      <td>{{ product.description }}</td>
+      <td>{{ product.category }}</td>
+      <td>{{ product.price }}</td>
+      <td>{{ product.date_created }}</td>
+      <td>{{ product.user_id }}</td>
+      <td>{{ product.vendor_id }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+
+</html>

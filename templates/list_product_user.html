@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+{% block image_grid %}
+<!-- Empty block to prevent image grid from appearing on this page -->
+{% endblock %} 
+{% block content %}
+<style>
+ 
+ body {
+      background-image: url("{{ url_for('static', filename='images/pexels-ekaterina-bolovtsova-6193327.jpg') }}");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      height: 170vh; /* Full height */
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+ 
+  h2 {
+    font-family: 'Arial', sans-serif;
+       margin-top: 30px;
+        text-align: center;
+        color: #002244;
+        margin-bottom: 30px;
+        font-size: 28px;
+        animation: fadeIn 1s ease-in;
+      
+  }
+
+  form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    animation: slideIn 1.2s ease-in-out;
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+  }
+  .complaints-container {
+   
+    justify-content: center;
+    margin-top: 100px;
+  }
+
+  label {
+    font-family: "Arial", sans-serif;
+    font-size: 16px;
+    color: #333;
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  input,
+  textarea,
+  select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+  textarea {
+    height: 120px;
+  }
+  input:focus,
+  textarea:focus,
+  select:focus {
+    border-color: #003366;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 51, 102, 0.5);
+    transition: box-shadow 0.3s ease-in-out;
+  }
+
+  .form-control-file {
+    border: none;
+  }
+  button {
+    background-color: #212529;
+    color: white;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+
+  button:hover {
+    background-color: #000;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideIn {
+    from {
+      transform: translateY(30px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+</style>
+<body>
+  <br><br><br><br><br><br><br><br>
+<h2>List a New Product</h2>
+<!-- <div class="complaints-container"> -->
+
+  <form
+  method="POST"
+  action="{{ url_for('list_product') }}"
+  enctype="multipart/form-data"
+  >
+  <div class="form-group">
+    <label for="name">Product Name</label>
+    <input type="text" class="form-control" id="name" name="name" required />
+  </div>
+  <div class="form-group">
+    <label for="description">Description</label>
+    <textarea
+    class="form-control"
+    id="description"
+    name="description"
+      required
+      ></textarea>
+    </div>
+    <div class="form-group">
+      <label for="category">Category</label>
+          <select class="form-control" id="category" name="category" required>
+            <option value="rent">Rent</option>
+            <option value="sell">Sell</option>
+            <option value="exchange">Exchange</option>
+            <option value="donate">Donate</option>
+          </select>
+        </div>
+    <div class="form-group">
+        <label for="price">Price</label>
+        <input
+      type="number"
+      class="form-control"
+      id="price"
+      name="price"
+      required
+      />
+    </div>
+    <div class="form-group">
+      <label for="photo">Upload Photo</label>
+    <input type="file" class="form-control-file" id="photo" name="photo" />
+</div>
+<button type="submit" class="btn">List Product</button>
+</form>
+<br /><br /><br /><br /><br /><br />
+
+<!-- </div> -->
+{% endblock %}
+<body>

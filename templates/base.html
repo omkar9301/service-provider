@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Dashboard</title>
+    <link rel="stylesheet " href="../static/css/userdashboard.css" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        background-image: url("{{ url_for('static', filename='images/pexels-kifkif13-photos-3614682-5997686.jpg') }}");
+        background-size: cover;
+        background-position: center;
+        background-repeat: repeat;
+        height: 170vh; /* Full height */
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+      }
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: Arial;
+      }
+
+      .header {
+        text-align: center;
+        padding: 32px;
+      }
+
+      .row {
+        display: -ms-flexbox; /* IE10 */
+        display: flex;
+        -ms-flex-wrap: wrap; /* IE10 */
+        flex-wrap: wrap;
+        padding: 0 4px;
+      }
+
+      /* Create four equal columns that sits next to each other */
+      .column {
+        -ms-flex: 25%; /* IE10 */
+        flex: 25%;
+        max-width: 25%;
+        padding: 0 4px;
+      }
+
+      .column img {
+        margin-top: 8px;
+        vertical-align: middle;
+        width: 100%;
+      }
+
+      /* Responsive layout - makes a two column-layout instead of four columns */
+      @media screen and (max-width: 800px) {
+        .column {
+          -ms-flex: 50%;
+          flex: 50%;
+          max-width: 50%;
+        }
+      }
+
+      /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+      @media screen and (max-width: 600px) {
+        .column {
+          -ms-flex: 100%;
+          flex: 100%;
+          max-width: 100%;
+        }
+      }
+      .container{
+        margin-top: 525px;
+        padding: 100px;
+      }
+      .heading{
+        color: #000;
+        /* background: rgb(205, 204, 204); */
+        border: ridge  5px  ;
+        font-family: 'Courier New', Courier, monospace;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <!-- <h1 class="logo">Service Provider<br><span>Welcome, {{ user.name }}</span></h1> -->
+      <a class="logo" href="{{ url_for('user_dashboard') }}">
+        <h1>Service Provider</h1>
+      </a>  
+      <h2 class="logo">Welcome, {{ user.name }}</h2>
+
+      <button class="menu-toggle" id="menuToggle">☰</button>
+
+      <ul class="menu" id="menu">
+        <li><a href="{{ url_for('list_problem') }}">List Problems</a></li>
+        <li><a href="{{ url_for('list_product') }}">List Products</a></li>
+        <li><a href="{{ url_for('browse_products') }}">Browse Products</a></li>
+        <li>
+          <a href="{{ url_for('listed_complaints') }}">Listed Complaints</a>
+        </li>
+        <li>
+          <a href="{{ url_for('accepted_complaints') }}">Accepted Complaints</a>
+        </li>
+      </ul>
+
+      <div class="icon-container">
+        <a href="{{ url_for('user_profile') }}" class="profile-icon">
+          <span class="material-icons">person</span>
+          <span class="tooltip-text">Profile</span>
+        </a>
+
+        <a href="{{ url_for('logout') }}" class="logout-icon">
+          <span class="material-icons">logout</span>
+          <span class="tooltip-text">Logout</span>
+        </a>
+      </div>
+    </header>
+    
+    <main>
+      {% block image_grid %}
+      <!-- This block can be overridden in child templates -->
+      {% endblock %}
+      {% block content %}
+      <!-- Content from extended templates will be inserted here -->
+      {% endblock %}
+    </main>
+    <footer id="footer">
+      <p>&copy; 2024 Service Provider</p>
+    </footer>
+
+    <script type="text/javascript">
+      document.addEventListener("DOMContentLoaded", function () {
+        var footer = document.getElementById("footer");
+        var footerHeight = footer.offsetHeight;
+
+        function handleScroll() {
+          var scrollPosition = window.innerHeight + window.scrollY;
+          var documentHeight = document.documentElement.scrollHeight;
+
+          if (scrollPosition >= documentHeight - footerHeight) {
+            footer.style.bottom = "0";
+          } else {
+            footer.style.bottom = "-" + footerHeight + "px";
+          }
+        }
+
+        window.addEventListener("scroll", handleScroll);
+        handleScroll(); // Initial check
+      });
+      // logic for nav toggle
+      window.addEventListener("scroll", function () {
+        var header = document.querySelector("header");
+        header.classList.toggle("sticky", window.scrollY > 0);
+      });
+      //menu toggle
+      document
+        .getElementById("menuToggle")
+        .addEventListener("click", function () {
+          const menu = document.getElementById("menu");
+          menu.classList.toggle("open"); // Toggle the 'open' class
+        });
+      // logic for flashes
+    </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

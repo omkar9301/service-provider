@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+
+{% block title %}User Dashboard{% endblock %}
+
+{% block content %}
+<!-- Other content specific to the dashboard goes here -->
+<h2>User Dashboard</h2>
+<p>Welcome to your dashboard. Here you can manage your services and track your requests.</p>
+{% endblock %}
+<style>
+    body {
+      background-image: url("{{ url_for('static', filename='images/pexels-kifkif13-photos-3614682-5997686.jpg') }}");
+      background-size: cover;
+      background-position: center;
+      background-repeat: repeat;
+      height: 170vh; /* Full height */
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial;
+    }
+
+    .header {
+      text-align: center;
+      padding: 32px;
+    }
+
+    .row {
+      display: -ms-flexbox; /* IE10 */
+      display: flex;
+      -ms-flex-wrap: wrap; /* IE10 */
+      flex-wrap: wrap;
+      padding: 0 4px;
+    }
+
+    /* Create four equal columns that sits next to each other */
+    .column {
+      -ms-flex: 25%; /* IE10 */
+      flex: 25%;
+      max-width: 25%;
+      padding: 0 4px;
+    }
+
+    .column img {
+      margin-top: 8px;
+      vertical-align: middle;
+      width: 100%;
+    }
+
+    /* Responsive layout - makes a two column-layout instead of four columns */
+    @media screen and (max-width: 800px) {
+      .column {
+        -ms-flex: 50%;
+        flex: 50%;
+        max-width: 50%;
+      }
+    }
+
+    /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+    @media screen and (max-width: 600px) {
+      .column {
+        -ms-flex: 100%;
+        flex: 100%;
+        max-width: 100%;
+      }
+    }
+    .container{
+      margin-top: 525px;
+      padding: 100px;
+    }
+    .heading{
+      color: #000;
+      /* background: rgb(205, 204, 204); */
+      border: ridge  5px  ;
+      font-family: 'Courier New', Courier, monospace;
+    }
+  </style>
+{% block image_grid %}
+<div class="container">
+    <h1 class="heading">System Services</h1>
+    <div class="row">
+      <div class="column">
+        <img src="/static/images/carpenter.jpeg" style="width: 100%" />
+        <img src="/static/images/chef.jpeg" style="width: 100%" />
+        <img src="/static/images/cleaner.jpeg" style="width: 100%" />
+        <img src="/static/images/driver.jpeg" style="width: 100%" />
+        <img src="/static/images/electrician.jpeg" style="width: 100%" />
+        <img src="/static/images/gardener.jpeg" style="width: 100%" />
+        <img src="/static/images/hairdresser.jpeg" style="width: 100%" />
+        <img src="/static/images/mason.jpeg" style="width: 100%" />
+        <img src="/static/images/image.png" style="width: 100%"/>
+      </div>
+      <div class="column">
+        <img src="/static/images/mechanic.jpeg" style="width: 100%" />
+        <img src="/static/images/painter.jpeg" style="width: 100%" />
+        <img src="/static/images/pestcontrol.jpeg" style="width: 100%" />
+        <img src="/static/images/qqqq.jpeg" style="width: 100%" />
+        <img src="/static/images/security.jpeg" style="width: 100%" />
+        <img src="/static/images/tailor.jpeg" style="width: 100%" />
+        <img src="/static/images/chef.jpeg" style="width: 100%" />
+        <img src="/static/images/markus-spiske-Vmn_WfR09tg-unsplash.jpg" style="width: 100%" />
+        <img src="/static/images/chef.jpeg" style="width: 100%" />
+      </div>
+      <div class="column">
+        <img src="/static/images/electrician.jpeg" style="width: 100%" />
+        <img src="/static/images/gardener.jpeg" style="width: 100%" />
+        <img src="/static/images/hairdresser.jpeg" style="width: 100%" />
+        <img src="/static/images/carpenter.jpeg" style="width: 100%" />
+        <img src="/static/images/chef.jpeg" style="width: 100%" />
+        <img src="/static/images/cleaner.jpeg" style="width: 100%" />
+        <img src="/static/images/driver.jpeg" style="width: 100%" />
+        <img src="/static/images/mason.jpeg" style="width: 100%" />
+        <img src="/static/images/image.png" style="width: 100%"/>
+      </div>
+      <div class="column">
+        <img src="/static/images/qqqq.jpeg" style="width: 100%" />
+        <img src="/static/images/security.jpeg" style="width: 100%" />
+        <img src="/static/images/tailor.jpeg" style="width: 100%" />
+        <img src="/static/images/chef.jpeg" style="width: 100%" />
+        <img src="/static/images/markus-spiske-Vmn_WfR09tg-unsplash.jpg" style="width: 100%" />
+        <img src="/static/images/chef.jpeg" style="width: 100%" />
+        <img src="/static/images/mechanic.jpeg" style="width: 100%" />
+        <img src="/static/images/painter.jpeg" style="width: 100%" />
+        <img src="/static/images/pestcontrol.jpeg" style="width: 100%" />
+      </div>
+    </div>
+  </div>
+{% endblock %}

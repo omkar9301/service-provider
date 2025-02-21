@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vendors List</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+    
+    header {
+      background-color: #212529;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    .vendor-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 20px;
+    }
+
+    .vendor-card {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin: 15px;
+      padding: 20px;
+      width: 300px;
+      text-align: center;
+      transition: transform 0.3s;
+    }
+
+    .vendor-card:hover {
+      transform: scale(1.05);
+    }
+
+    .vendor-card h2 {
+      font-size: 22px;
+      color: #212529;
+    }
+
+    .vendor-card p {
+      font-size: 16px;
+      color: #555;
+    }
+
+    .vendor-card .btn-info {
+      background-color: #212529;
+      color: white;
+      padding: 8px 15px;
+      font-size: 14px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    .vendor-card .btn-info:hover {
+      background-color: #000;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Vendors List</h1>
+  </header>
+
+  <main>
+    <div class="vendor-container">
+      {% if vendors %}
+        {% for vendor in vendors %}
+          <div class="vendor-card">
+            <h2>{{ vendor.name }}</h2>
+            <p>Email: {{ vendor.email }}</p>
+            <p>Phone: {{ vendor.phone }}</p>
+            <a href="{{ url_for('view_vendor_details2', vendor_id=vendor.id) }}" class="btn-info">View Profile</a>
+          </div>
+        {% endfor %}
+      {% else %}
+        <p>No vendors available.</p>
+      {% endif %}
+    </div>
+  </main>
+</body>
+</html>
