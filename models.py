@@ -49,7 +49,9 @@ class Complaint(db.Model):
     is_accepted = db.Column(db.Boolean, default=False)
     vendor_id = db.Column(db.Integer, db.ForeignKey('vendor.id'))
     photo = db.Column(db.String(150), nullable=True)  # New photo field
-    
+    schedule_date = db.Column(db.Date, nullable=True)
+    schedule_time = db.Column(db.Time, nullable=True)
+
     user = db.relationship('User', backref=db.backref('complaints', lazy=True))
     vendor = db.relationship('Vendor', backref=db.backref('accepted_complaints', lazy=True))
 

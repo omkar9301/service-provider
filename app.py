@@ -225,12 +225,17 @@ def list_problem_1():
         description = request.form['description']
         category = request.form['category'].strip()
         city = request.form['city'].strip()
-
         photo = request.files.get('photo')
+        schedule_date = request.form.get('schedule-date')
+        schedule_time = request.form.get('schedule-time')
+
         photo_filename = None
         if photo and allowed_file(photo.filename):
             photo_filename = secure_filename(photo.filename)
             photo.save(os.path.join(app.config['UPLOAD_FOLDER'], photo_filename))
+
+        schedule_date = datetime.strptime(schedule_date, "%Y-%m-%d").date() if schedule_date else None
+        schedule_time = datetime.strptime(schedule_time, "%H:%M").time() if schedule_time else None
 
         new_complaint = Complaint(
             user_id=session['user_id'],
@@ -238,6 +243,8 @@ def list_problem_1():
             category=category,
             city=city,
             photo=photo_filename
+            schedule_date=schedule_date,
+            schedule_time=schedule_time
         )
         db.session.add(new_complaint)
         db.session.commit()
