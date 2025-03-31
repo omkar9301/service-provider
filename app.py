@@ -242,7 +242,7 @@ def list_problem_1():
             description=description,
             category=category,
             city=city,
-            photo=photo_filename
+            photo=photo_filename,
             schedule_date=schedule_date,
             schedule_time=schedule_time
         )
