@@ -17,11 +17,41 @@
       color: white;
       padding: 20px;
       text-align: center;
+      position: relative;
     }
 
     header h1 {
       margin: 0;
       font-size: 24px;
+    }
+
+    .logout-btn {
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      background-color: #dc3545;
+      color: white;
+      padding: 8px 15px;
+      font-size: 14px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .logout-btn:hover {
+      background-color: #c82333;
+    }
+
+    .filter-container {
+      text-align: center;
+      margin: 20px;
+    }
+
+    .filter-container select {
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 5px;
     }
 
     .vendor-container {
@@ -71,20 +101,56 @@
       background-color: #000;
     }
   </style>
+  <script>
+    function filterVendors() {
+      let category = document.getElementById("categoryFilter").value;
+      let vendorCards = document.querySelectorAll(".vendor-card");
+      vendorCards.forEach(card => {
+        if (category === "all" || card.dataset.category === category) {
+          card.style.display = "block";
+        } else {
+          card.style.display = "none";
+        }
+      });
+    }
+  </script>
 </head>
 <body>
   <header>
     <h1>Vendors List</h1>
+    <a href="{{ url_for('user_dashboard') }}" class="logout-btn">Logout</a>
   </header>
+
+  <div class="filter-container">
+    <label for="categoryFilter">Filter by Category:</label>
+    <select id="categoryFilter" onchange="filterVendors()">
+      <option value="all">All</option>
+      <option value="plumber">Plumber</option>
+      <option value="painter">Painter</option>
+      <option value="mechanic">Mechanic</option>
+      <option value="electrician">Electrician</option>
+      <option value="carpenter">Carpenter</option>
+      <option value="mason">Mason</option>
+      <option value="gardener">Gardener</option>
+      <option value="cleaner">Cleaner</option>
+      <option value="chef">Chef</option>
+      <option value="driver">Driver</option>
+      <option value="tailor">Tailor</option>
+      <option value="hairdresser">Hairdresser</option>
+      <option value="pest_control">Pest Control</option>
+      <option value="security_guard">Security Guard</option>
+    </select>
+  </div>
 
   <main>
     <div class="vendor-container">
       {% if vendors %}
         {% for vendor in vendors %}
-          <div class="vendor-card">
+          <div class="vendor-card" data-category="{{ vendor.category }}">
             <h2>{{ vendor.name }}</h2>
             <p>Email: {{ vendor.email }}</p>
-            <p>Phone: {{ vendor.phone }}</p>
+            <p>Phone: {{ vendor.phone_no }}</p>
+            <p>Category: {{ vendor.category }}</p>
             <a href="{{ url_for('view_vendor_details2', vendor_id=vendor.id) }}" class="btn-info">View Profile</a>
           </div>
         {% endfor %}
